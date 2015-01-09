@@ -75,20 +75,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.post('/login',
 
-  // temp hack for development, uncomment below when not needed
-  function(req, res) {
-    new Repository().getUserById('foo', function(err, user) {
-      req.login(user, function(err) {
-        return res.redirect('/');
-      });
-    });
-  }
-  //passport.authenticate('local', { successRedirect: '/',
-  //                                                  failureRedirect: '/' })
-
-);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -104,11 +91,12 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+      debug(err.stack);
+      res.status(err.status || 500);
+      res.render('error', {
+        message: err.message,
+        error: err
+      });
     });
 }
 
