@@ -26,7 +26,7 @@ Repository.prototype = {
   getUserById: function(id, callback) {
     var err = null;
     Repository.prototype.getAllUsers(function(err, users) {
-      var user = Enumerable.from(Repository.prototype.allUsers).first(function(u) { return u.id == id });
+      var user = Enumerable.from(users).first(function(u) { return u.id == id });
       callback(err, user);
     });
     //var user = Enumerable.from(Repository.prototype.allUsers).first(function(u) { return u.id == id });

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router()
-  , Repository = require('../Repository');
+  , Repository = require('../Repository')
+  , passport = require('passport')
+;
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -34,15 +36,15 @@ router.post('/register', function(req, res) {
 
 router.post('/login',
   // temp hack for development, uncomment below when not needed
-  function(req, res) {
-    new Repository().getUserById('foo', function(err, user) {
-      req.login(user, function(err) {
-        return res.redirect('/');
-      });
-    });
-  }
-  //passport.authenticate('local', { successRedirect: '/',
-  //                                                  failureRedirect: '/' })
+  //function(req, res) {
+  //  new Repository().getUserById('foo', function(err, user) {
+  //    req.login(user, function(err) {
+  //      return res.redirect('/');
+  //    });
+  //  });
+  //}
+  passport.authenticate('local', { successRedirect: '/',
+                                                    failureRedirect: '/' })
 );
 
 module.exports = router;
