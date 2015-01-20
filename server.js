@@ -9,6 +9,7 @@ var bodyParser = require('body-parser')
   , Repository = require('./Repository')
   , LocalStrategy = require('passport-local').Strategy
   , debug = require('debug')('RioGrande')
+  , multer = require('multer')
   ;
 
 var routes = require('./routes/index');
@@ -52,6 +53,21 @@ passport.use(new LocalStrategy(
       });
   }
 ));
+
+// configure file uploads
+
+app.use(multer({ dest: './data/uploads/',
+  rename: function (fieldname, filename) {
+    return filename+Date.now();
+  },
+  onFileUploadStart: function (file) {
+    console.log(file.originalname + ' is starting ...')
+  },
+  onFileUploadComplete: function (file) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path)
+    done=true;
+  }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
