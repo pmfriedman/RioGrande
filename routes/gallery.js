@@ -7,13 +7,7 @@ var router = express.Router()
 /* GET home page. */
 router.get('/:userId', function(req, res) {
 
-  tesseract.process('"' + __dirname + '/../data/uploads/2015-01-18 10.48.021421726392886.jpg"',function(err, text) {
-    if(err) {
-      console.error(err);
-    } else {
-      console.log(text);
-    }
-  });
+
 
   // TODO: security
 
@@ -31,10 +25,17 @@ router.post('/image/upload',function(req,res){
   if(done==true){
     console.log(req.files);
 
+    tesseract.process('"' + __dirname + '/../' + req.files.userImage.path + '"',function(err, text) {
+      if(err) {
+        console.error(err);
+      } else {
+        console.log(text);
+
+        res.end(text);
+      }
+    });
 
 
-
-    res.end("File uploaded.");
   }
 });
 
