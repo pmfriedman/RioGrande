@@ -20,6 +20,7 @@
     "debug": "~2.0",
     "linq": "~3.0.4-beta",
     "multer": "~0.1.7",
-    "node-tesseract": "*"
+    "node-tesseract": "*",
+    "moment": "*"
   }
 }

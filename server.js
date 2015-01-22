@@ -14,7 +14,8 @@ var bodyParser = require('body-parser')
 
 var routes = require('./routes/index');
 var users = require('./routes/users')
-  , gallery = require('./routes/gallery');
+  , gallery = require('./routes/gallery')
+  , learning  = require('./routes/learning');
 
 var app = express();
 
@@ -93,6 +94,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/gallery', gallery);
+app.use('/learning', learning);
 
 
 // catch 404 and forward to error handler
