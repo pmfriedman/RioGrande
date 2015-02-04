@@ -4,22 +4,27 @@
 "use strict";
 var Enumerable = require('linq')
   , storage = require('node-persist')
+  , moment = require('moment')
   ;
 
-storage.init();
 
 function Repository() {};
 
 Repository.prototype = {
 
   getHasLearnedOnDate: function(params, callback) {
-    var hasLearned = true;
+    var allLearned = storage.getItem('hasLearned') || {};
+    var today = moment().format('MMMM D YYYY');
+    var hasLearned = allLearned[today];
     callback(null, { hasLearned: hasLearned });
   },
 
   setHasLearnedOnDate: function(params, callback) {
-    var hasLearned = params.hasLearned;
-    callback(null);
+    var hasLearned = params.hasLearned || false;
+    var allLearned = storage.getItem('hasLearned') || {};
+    var today = moment().format('MMMM D YYYY');
+    allLearned[today] = hasLearned;
+    storage.setItem('hasLearned', allLearned, callback(null));
   }
 
 }

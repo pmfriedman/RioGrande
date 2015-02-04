@@ -10,6 +10,7 @@ var bodyParser = require('body-parser')
   , LocalStrategy = require('passport-local').Strategy
   , debug = require('debug')('RioGrande')
   , multer = require('multer')
+  , storage = require('node-persist')
   ;
 
 var routes = require('./routes/index');
@@ -18,6 +19,9 @@ var users = require('./routes/users')
   , learning  = require('./routes/learning');
 
 var app = express();
+
+
+storage.init();
 
 /*
  * Authentication Layer
