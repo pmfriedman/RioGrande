@@ -6,7 +6,13 @@ extends layout
 block content
     h1 Have you learned today?
     div
-        img(src='/images/happy.png')
-        img(src='/images/sad.png')
+        if hasLearned
+            img(src='/images/happy.png', class='today-image')
+        else if (hasLearned === false)
+            img(src='/images/sad.png', class='today-image')
+        else
+            img(src='/images/unsure.jpg', class='today-image')
     form(method='post', action='/learning/today')
-        input(type='submit')
+        input(type='submit', name='hasLearned', value='YES')
+        input(type='submit', name='hasLearned', value='NO')
+        input(type='submit', name='hasLearned', value='RESET')

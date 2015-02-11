@@ -20,7 +20,7 @@ Repository.prototype = {
   },
 
   setHasLearnedOnDate: function(params, callback) {
-    var hasLearned = params.hasLearned || false;
+    var hasLearned = params.hasLearned;
     var allLearned = storage.getItem('hasLearned') || {};
     var today = moment().format('MMMM D YYYY');
     allLearned[today] = hasLearned;

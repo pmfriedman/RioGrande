@@ -6,20 +6,23 @@ var router = express.Router()
 
 /* GET home page. */
 router.get('/today', function(req, res) {
-
-
-
   var now = moment();
-
   new repo().getHasLearnedOnDate({ date: now }, function(error, data) {
-
     res.render('learning', { hasLearned: data.hasLearned  });
 
   });
 });
 
 router.post('/today', function(req, res) {
-  new repo().setHasLearnedOnDate({ hasLearned: req.body.hasLearned }, function(error) {
+
+  var hasLearned = null;
+  if (req.body.hasLearned == 'YES') {
+    hasLearned = true;
+  } else if (req.body.hasLearned == 'NO') {
+    hasLearned = false;
+  }
+
+  new repo().setHasLearnedOnDate({ hasLearned: hasLearned }, function(error) {
     res.redirect('/learning/today');
 
   });
