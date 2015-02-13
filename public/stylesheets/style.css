@@ -8,5 +8,13 @@ a {
 }
 
 .today-image {
-  height: 200px;
+  width: 100%;
+  max-width: 600px;
+  height: 600px;
+}
+
+.today-button {
+  height: 150px;
+  width: 200px;
+  font-size: 50px;
 }
