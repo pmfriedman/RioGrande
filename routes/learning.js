@@ -8,7 +8,10 @@ var router = express.Router()
 router.get('/today', function(req, res) {
   var now = moment();
   new repo().getHasLearnedOnDate({ date: now }, function(error, data) {
-    res.render('learning', { hasLearned: data.hasLearned  });
+
+    var imageIndex = Math.floor((Math.random() * 3) + 1)
+
+    res.render('learning', { hasLearned: data.hasLearned, imageIndex: imageIndex  });
 
   });
 });
