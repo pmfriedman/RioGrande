@@ -9,9 +9,23 @@ router.get('/today', function(req, res) {
   var now = moment();
   new repo().getHasLearnedOnDate({ date: now }, function(error, data) {
 
-    var imageIndex = Math.floor((Math.random() * 3) + 1)
+    new repo().getImageCatalog(null, function(error, catalog) {
 
-    res.render('learning', { hasLearned: data.hasLearned, imageIndex: imageIndex  });
+      var tag = 'unsure';
+      if (data.hasLearned === true) {
+        tag = 'happy';
+      } else if (data.hasLearned === false) {
+        tag = 'sad';
+      }
+
+      var relevantImages = catalog.items.filter(function(item) {
+        return item.tags.indexOf(tag) >= 0;
+      });
+
+      var imageIndex = Math.floor((Math.random() * relevantImages.length))
+
+      res.render('learning', { hasLearned: data.hasLearned, fileName: relevantImages[imageIndex].fileName  });
+    });
 
   });
 });

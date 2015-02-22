@@ -16,7 +16,9 @@ var bodyParser = require('body-parser')
 var routes = require('./routes/index');
 var users = require('./routes/users')
   , gallery = require('./routes/gallery')
-  , learning  = require('./routes/learning');
+  , learning  = require('./routes/learning')
+  , image = require('./routes/image')
+  ;
 
 var app = express();
 
@@ -99,6 +101,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/gallery', gallery);
 app.use('/learning', learning);
+app.use('/image', image);
 
 
 // catch 404 and forward to error handler

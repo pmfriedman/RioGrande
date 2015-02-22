@@ -1,0 +1,12 @@
+//
+   Created by PMFriedman on 1/13/2015.
+
+extends layout
+
+block content
+    div
+        each val, index in catalog
+            div #{val.id}
+            div #{val.tags}
+            div
+                img(src='/images/' + val.fileName, class='today-image')

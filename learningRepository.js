@@ -25,7 +25,13 @@ Repository.prototype = {
     var today = moment().format('MMMM D YYYY');
     allLearned[today] = hasLearned;
     storage.setItem('hasLearned', allLearned, callback(null));
+  },
+
+  getImageCatalog: function(options, callback) {
+    var catalog = storage.getItem('imageCatalog') || { items: [] };
+    callback(null, catalog);
   }
+
 
 }
 
